@@ -65,6 +65,7 @@ Before reporting a task complete:
 - Portrait, landscape, square, and double-page spreads must be tested.
 - Do not hard-code panel metadata inside UI components.
 - The selected panel and active filters should eventually be URL-addressable.
+- After every agent run, update README.md on how to run the webapp
 
 ## Durable learnings
 

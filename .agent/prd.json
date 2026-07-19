@@ -5,7 +5,7 @@
     {
       "id": "MG-001",
       "title": "Create the design-token foundation",
-      "status": "pending",
+      "status": "complete",
       "attempts": 0,
       "description": "Define the paper, ink, typography, spacing, border, and motion primitives used throughout the site.",
       "acceptanceCriteria": [
