@@ -1,0 +1,26 @@
+/* [project]/src/app/body_1721454d.module.css [app-client] (css) */
+@font-face {
+  font-family: body;
+  src: url("../media/ibm_plex_sans_latin_wght_normal-s.p.15jby9eboz7vb.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 700;
+}
+
+@font-face {
+  font-family: body Fallback;
+  src: local(Arial);
+  ascent-override: 101.35%;
+  descent-override: 27.19%;
+  line-gap-override: 0.0%;
+  size-adjust: 101.13%;
+}
+
+.body_1721454d-module__OXjT9W__className {
+  font-family: body, body Fallback;
+}
+
+.body_1721454d-module__OXjT9W__variable {
+  --font-body: "body", "body Fallback";
+}
+
+/*# sourceMappingURL=src_app_body_1721454d_module_css_1igg3k2._.single.css.map*/

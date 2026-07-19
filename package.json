@@ -4,7 +4,8 @@
 		"dev": "next dev",
 		"lint": "eslint .",
 		"build": "next build",
-		"start": "next start"
+		"start": "next start",
+		"agent:loop": "./scripts/agent-loop.sh"
 	},
 	"dependencies": {
 		"@fontsource-variable/ibm-plex-sans": "^5.2.8",

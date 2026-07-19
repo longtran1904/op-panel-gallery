@@ -50,8 +50,9 @@ commands pass.
 - Keep filtering logic outside visual components.
 - Avoid new dependencies unless they materially reduce complexity.
 
-## Required validation
+## Required validation (Only required when agent is in task execution mode)
 
+Don't applyy validation steps when the prompt involves improving agent loop, agent architecture
 Before reporting a task complete:
 
 1. Run `./scripts/verify.sh`.

@@ -1,1 +1,3 @@
 node_modules
+.agent/runs/
+.agent/.loop.lock

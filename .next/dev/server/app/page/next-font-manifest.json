@@ -1,0 +1,11 @@
+{
+  "pages": {},
+  "app": {
+    "[project]/src/app/page": [
+      "static/media/newsreader_latin_opsz_normal-s.p.0dc79pquxokce.woff2",
+      "static/media/ibm_plex_sans_latin_wght_normal-s.p.15jby9eboz7vb.woff2"
+    ]
+  },
+  "appUsingSizeAdjust": true,
+  "pagesUsingSizeAdjust": false
+}

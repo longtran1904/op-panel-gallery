@@ -27,7 +27,7 @@
     {
       "id": "MG-002",
       "title": "Create the canonical panel data model",
-      "status": "pending",
+      "status": "complete",
       "attempts": 0,
       "description": "Add typed metadata for six representative placeholder panels.",
       "acceptanceCriteria": [
@@ -49,7 +49,7 @@
       "id": "MG-003",
       "title": "Build the editorial gallery composition",
       "status": "pending",
-      "attempts": 0,
+      "attempts": 1,
       "description": "Render the six panels as a responsive editorial exhibition.",
       "acceptanceCriteria": [
         "Panels are rendered from the canonical data source",

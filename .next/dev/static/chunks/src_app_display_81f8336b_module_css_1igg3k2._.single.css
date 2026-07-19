@@ -1,0 +1,26 @@
+/* [project]/src/app/display_81f8336b.module.css [app-client] (css) */
+@font-face {
+  font-family: display;
+  src: url("../media/newsreader_latin_opsz_normal-s.p.0dc79pquxokce.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 200 800;
+}
+
+@font-face {
+  font-family: display Fallback;
+  src: local(Arial);
+  ascent-override: 80.52%;
+  descent-override: 29.03%;
+  line-gap-override: 0.0%;
+  size-adjust: 91.28%;
+}
+
+.display_81f8336b-module__jNZ7jq__className {
+  font-family: display, display Fallback;
+}
+
+.display_81f8336b-module__jNZ7jq__variable {
+  --font-display: "display", "display Fallback";
+}
+
+/*# sourceMappingURL=src_app_display_81f8336b_module_css_1igg3k2._.single.css.map*/
