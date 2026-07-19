@@ -1,0 +1,95 @@
+{
+  "project": "Manga Panel Gallery",
+  "currentMilestone": "Six-panel vertical slice",
+  "tasks": [
+    {
+      "id": "MG-001",
+      "title": "Create the design-token foundation",
+      "status": "pending",
+      "attempts": 0,
+      "description": "Define the paper, ink, typography, spacing, border, and motion primitives used throughout the site.",
+      "acceptanceCriteria": [
+        "Global paper, ink, muted ink, border, and accent variables exist",
+        "The root layout loads display and body typography through next/font",
+        "No gallery, filtering, modal, or animation feature is added",
+        "The page works at 320px without horizontal overflow",
+        "Lint, type checking, and production build pass"
+      ],
+      "allowedAreas": [
+        "src/app/layout.tsx",
+        "src/app/globals.css",
+        "src/app/page.tsx"
+      ],
+      "validation": [
+        "./scripts/verify.sh"
+      ]
+    },
+    {
+      "id": "MG-002",
+      "title": "Create the canonical panel data model",
+      "status": "pending",
+      "attempts": 0,
+      "description": "Add typed metadata for six representative placeholder panels.",
+      "acceptanceCriteria": [
+        "One canonical MangaPanel interface exists",
+        "Six panels cover portrait, landscape, square, and spread formats",
+        "No component contains duplicated panel metadata",
+        "The model can support at least 100 records without structural changes",
+        "Lint, type checking, and production build pass"
+      ],
+      "allowedAreas": [
+        "src/data",
+        "src/types"
+      ],
+      "validation": [
+        "./scripts/verify.sh"
+      ]
+    },
+    {
+      "id": "MG-003",
+      "title": "Build the editorial gallery composition",
+      "status": "pending",
+      "attempts": 0,
+      "description": "Render the six panels as a responsive editorial exhibition.",
+      "acceptanceCriteria": [
+        "Panels are rendered from the canonical data source",
+        "The layout is not a uniform card grid",
+        "DOM order remains logical and accessible",
+        "Portrait and spread artwork do not appear awkwardly cropped",
+        "Artwork remains the dominant element",
+        "The layout passes at 320px, 768px, and 1440px",
+        "Lint, type checking, and production build pass"
+      ],
+      "allowedAreas": [
+        "src/components/gallery",
+        "src/app/page.tsx"
+      ],
+      "validation": [
+        "./scripts/verify.sh"
+      ]
+    },
+    {
+      "id": "MG-004",
+      "title": "Implement the panel detail experience",
+      "status": "pending",
+      "attempts": 0,
+      "description": "Create an accessible detail experience with URL-backed selection.",
+      "acceptanceCriteria": [
+        "A panel can be opened and closed using the keyboard",
+        "Escape closes the view",
+        "Left and right arrows navigate between panels",
+        "Focus returns to the triggering element",
+        "The selected panel is represented in the URL",
+        "Mobile uses an immersive reading layout",
+        "Lint, type checking, and production build pass"
+      ],
+      "allowedAreas": [
+        "src/components/gallery",
+        "src/app/panels"
+      ],
+      "validation": [
+        "./scripts/verify.sh"
+      ]
+    }
+  ]
+}
