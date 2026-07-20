@@ -67,8 +67,8 @@
     {
       "id": "MG-003",
       "title": "Build the editorial gallery composition",
-      "status": "pending",
-      "attempts": 3,
+      "status": "complete",
+      "attempts": 8,
       "description": "Render the six panels as a responsive editorial exhibition.",
       "acceptanceCriteria": [
         "Panels are rendered from the canonical data source",
@@ -90,7 +90,7 @@
     {
       "id": "MG-004",
       "title": "Implement the panel detail experience",
-      "status": "pending",
+      "status": "complete",
       "attempts": 1,
       "description": "Create an accessible detail experience with URL-backed selection.",
       "acceptanceCriteria": [

@@ -10,6 +10,7 @@ LOCK_DIR="$ROOT_DIR/.agent/.loop.lock"
 
 MAX_ITERATIONS="${AGENT_LOOP_MAX_ITERATIONS:-10}"
 MAX_TASK_ATTEMPTS="${AGENT_TASK_MAX_ATTEMPTS:-3}"
+CODEX_BIN="${CODEX_BIN:-codex-playwright}"
 EXTRA_CODEX_ARGS=()
 DRY_RUN=0
 
@@ -29,7 +30,7 @@ usage() {
     "Usage: scripts/agent-loop.sh [options] [-- extra-codex-args]" \
     "" \
     "Runs a serial Codex orchestration loop. Each pass starts one fresh" \
-    "codex exec session and asks it to complete exactly one pending task." \
+    "$CODEX_BIN exec session and asks it to complete exactly one pending task." \
     "" \
     "Options:" \
     "  --max-iterations N      Stop after N spawned agents. Default: 10" \
@@ -40,7 +41,8 @@ usage() {
     "" \
     "Environment:" \
     "  AGENT_LOOP_MAX_ITERATIONS" \
-    "  AGENT_TASK_MAX_ATTEMPTS"
+    "  AGENT_TASK_MAX_ATTEMPTS" \
+    "  CODEX_BIN                 Codex-compatible binary to run. Default: codex-playwright"
 }
 
 if [ "${1:-}" = "--" ] && [ "$#" -gt 1 ] && is_loop_option "$2"; then
@@ -106,8 +108,8 @@ if [ "$MAX_TASK_ATTEMPTS" -lt 1 ]; then
   exit 64
 fi
 
-if ! command -v codex >/dev/null 2>&1; then
-  printf 'codex CLI was not found on PATH.\n' >&2
+if ! command -v "$CODEX_BIN" >/dev/null 2>&1; then
+  printf '%s was not found on PATH. Set CODEX_BIN to an executable Codex-compatible binary.\n' "$CODEX_BIN" >&2
   exit 127
 fi
 
@@ -219,18 +221,19 @@ while [ "$iteration" -le "$MAX_ITERATIONS" ]; do
   before_signature="$(task_state_signature)"
 
   printf '==> Iteration %d/%d: %s\n' "$iteration" "$MAX_ITERATIONS" "$task_summary"
+  printf '==> Codex binary: %s\n' "$CODEX_BIN"
   printf '==> Transcript: %s\n' "$transcript"
 
   prompt="You are a fresh Codex agent spawned by scripts/agent-loop.sh.
 
 Execute exactly one Manga Panel Gallery iteration.
 
-Follow AGENTS.md and .agent/iteration-prompt.md exactly. Select one pending task from .agent/prd.json whose attempts count is below $MAX_TASK_ATTEMPTS, restate its acceptance criteria, implement only that task, run the required validation, update .agent/prd.json and .agent/progress.md only according to the iteration rules, update README.md with webapp run instructions, review the diff, and stop after that single task.
+Follow AGENTS.md and .agent/iteration-prompt.md exactly. Select one pending task from .agent/prd.json, restate its acceptance criteria, implement only that task, run the required validation, update .agent/prd.json and .agent/progress.md only according to the iteration rules, update README.md with webapp run instructions, review the diff, and stop after that single task.
 
 Do not continue to a second task in this session."
 
   set +e
-  codex exec \
+  "$CODEX_BIN" exec \
     -C "$ROOT_DIR" \
     --sandbox workspace-write \
     ${EXTRA_CODEX_ARGS[@]+"${EXTRA_CODEX_ARGS[@]}"} \
