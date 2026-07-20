@@ -109,6 +109,27 @@
       "validation": [
         "./scripts/verify.sh"
       ]
+    },
+    {
+      "id": "MG-005",
+      "title": "Implement the panel detail experience",
+      "status": "complete",
+      "attempts": 0,
+      "description": "Update the web app to use Vercel Analytics for pageview and event tracking.",
+      "acceptanceCriteria": [
+        "Vercel Analytics is installed and configured",
+        "Pageviews are tracked for the gallery and panel detail views",
+        "Events are tracked for panel open, close, and navigation actions",
+        "Lint, type checking, and production build pass"
+      ],
+      "allowedAreas": [
+        "src/app/layout.tsx",
+        "src/app/globals.css",
+        "src/components/gallery"
+      ],
+      "validation": [
+        "./scripts/verify.sh"
+      ]
     }
   ]
 }

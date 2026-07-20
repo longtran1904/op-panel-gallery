@@ -1,5 +1,6 @@
 "use client";
 
+import { track } from "@vercel/analytics/react";
 import Image from "next/image";
 import Link from "next/link";
 import {
@@ -21,6 +22,17 @@ interface PanelGalleryExperienceProps {
 
 const panelParam = "panel";
 
+function getPanelAnalyticsProperties(panel: MangaPanel, index: number) {
+	return {
+		panel_slug: panel.slug,
+		panel_title: panel.title,
+		panel_series: panel.series,
+		panel_rank: panel.rank,
+		panel_position: index + 1,
+		panel_orientation: panel.orientation,
+	};
+}
+
 function getCurrentPanelSlug(validSlugs: Set<string>) {
 	const params = new URLSearchParams(window.location.search);
 	const slug = params.get(panelParam);
@@ -31,6 +43,13 @@ function writePanelUrl(slug: string, method: "pushState" | "replaceState") {
 	const url = new URL(window.location.href);
 	url.searchParams.set(panelParam, slug);
 	window.history[method]({}, "", `${url.pathname}${url.search}${url.hash}`);
+}
+
+function trackPanelPageview(slug: string) {
+	window.va?.("pageview", {
+		route: "/?panel=[slug]",
+		path: `/?${panelParam}=${slug}`,
+	});
 }
 
 function clearPanelUrl() {
@@ -73,19 +92,34 @@ export function PanelGalleryExperience({ panels }: PanelGalleryExperienceProps) 
 
 	const openPanel = useCallback(
 		(slug: string, trigger: HTMLElement) => {
+			const panelIndex = panels.findIndex((panel) => panel.slug === slug);
+			const panel = panels[panelIndex];
+
+			if (panel) {
+				track("Panel Open", getPanelAnalyticsProperties(panel, panelIndex));
+			}
+
 			lastTriggerRef.current = trigger;
 			selectPanel(slug, "pushState");
+			trackPanelPageview(slug);
 		},
-		[selectPanel],
+		[panels, selectPanel],
 	);
 
-	const closePanel = useCallback(() => {
+	const closePanel = useCallback((source: "backdrop" | "button" | "escape") => {
+		if (selectedPanel) {
+			track("Panel Close", {
+				...getPanelAnalyticsProperties(selectedPanel, selectedIndex),
+				close_source: source,
+			});
+		}
+
 		setSelectedSlug(null);
 		clearPanelUrl();
 		window.requestAnimationFrame(() => {
 			lastTriggerRef.current?.focus();
 		});
-	}, []);
+	}, [selectedIndex, selectedPanel]);
 
 	const movePanel = useCallback(
 		(direction: -1 | 1) => {
@@ -98,10 +132,16 @@ export function PanelGalleryExperience({ panels }: PanelGalleryExperienceProps) 
 			const nextPanel = panels[nextIndex];
 
 			if (nextPanel) {
+				track("Panel Navigation", {
+					...getPanelAnalyticsProperties(nextPanel, nextIndex),
+					from_panel_slug: selectedPanel?.slug,
+					direction: direction === 1 ? "next" : "previous",
+				});
 				selectPanel(nextPanel.slug, "replaceState");
+				trackPanelPageview(nextPanel.slug);
 			}
 		},
-		[panels, selectPanel, selectedIndex],
+		[panels, selectPanel, selectedIndex, selectedPanel],
 	);
 
 	useEffect(() => {
@@ -126,7 +166,7 @@ export function PanelGalleryExperience({ panels }: PanelGalleryExperienceProps) 
 		const handleKeyDown = (event: globalThis.KeyboardEvent) => {
 			if (event.key === "Escape") {
 				event.preventDefault();
-				closePanel();
+				closePanel("escape");
 				return;
 			}
 
@@ -260,7 +300,7 @@ export function PanelGalleryExperience({ panels }: PanelGalleryExperienceProps) 
 					role="presentation"
 					onMouseDown={(event) => {
 						if (event.target === event.currentTarget) {
-							closePanel();
+							closePanel("backdrop");
 						}
 					}}
 				>
@@ -316,7 +356,7 @@ export function PanelGalleryExperience({ panels }: PanelGalleryExperienceProps) 
 								<button
 									ref={closeButtonRef}
 									type="button"
-									onClick={closePanel}
+									onClick={() => closePanel("button")}
 									aria-label="Close panel detail"
 								>
 									Close

@@ -148,3 +148,16 @@
 - Direct URL checks passed: `/?panel=wall-of-titans` opened the matching dialog and `/panels/straw-hat-at-dawn` loaded the standalone detail page without horizontal overflow at 320px.
 - Visual rubric score: 11/12. Artwork priority 2, editorial character 2, ratio handling 2, typography 2, mobile reading 1, restraint 2. Mobile detail now reads sequentially without control overlap; it remains intentionally simple rather than highly cinematic.
 - Acceptance criteria confirmed: keyboard open/close, Escape close, arrow navigation, focus restoration, URL-backed selection, immersive mobile detail layout, and lint/type/build validation all passed.
+
+## 2026-07-20 — MG-005 completed Vercel Analytics integration
+
+- Selected MG-005 as the only pending task.
+- Acceptance criteria restated before editing: Vercel Analytics is installed and configured, pageviews are tracked for gallery and panel detail views, events are tracked for panel open, close, and navigation actions, and lint/type/build validation passes.
+- Inspected the current gallery/detail implementation and relevant Git history. `@vercel/analytics` was already present in the uncommitted package and lockfile changes, so this iteration configured it in `src/app/layout.tsx` and added custom event tracking in `src/components/gallery/panel-gallery-experience.tsx`.
+- Validation passed: `./scripts/verify.sh`.
+- Production server validation passed: `pnpm exec next start -H 127.0.0.1 -p 3000` served the rebuilt app at `http://127.0.0.1:3000`.
+- Live 320px browser checks passed with Playwright Chromium: the root analytics script was injected, `/` emitted a gallery pageview, opening `Open Straw Hat at Dawn` emitted `Panel Open` and a `/?panel=straw-hat-at-dawn` pageview, ArrowRight/ArrowLeft emitted `Panel Navigation` events and overlay pageviews, Escape emitted `Panel Close`, and focus returned to the triggering link.
+- Direct panel route pageview check passed: `/panels/straw-hat-at-dawn` emitted a pageview with route `/panels/[slug]` and path `/panels/straw-hat-at-dawn`.
+- 320px overflow check passed: `docClientWidth=320`, `docScrollWidth=320`, `bodyClientWidth=320`, `bodyScrollWidth=320`.
+- Visual rubric: not scored; this task adds analytics instrumentation and does not alter the visual design.
+- Acceptance criteria confirmed: analytics dependency present, root Analytics component configured, gallery and detail pageviews tracked, panel open/close/navigation events tracked, and lint/type/build validation passed.

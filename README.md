@@ -34,6 +34,9 @@ direct panel pages are available at paths such as
 `http://localhost:3000/panels/straw-hat-at-dawn`.
 The focused detail view can also be opened directly from the homepage URL with
 `http://localhost:3000/?panel=straw-hat-at-dawn`.
+Vercel Analytics is included in the app shell; deployed Vercel builds track
+gallery and panel detail pageviews plus panel open, close, and navigation
+events after Web Analytics is enabled for the project in Vercel.
 
 For explicit local binding during agent or browser validation:
 
