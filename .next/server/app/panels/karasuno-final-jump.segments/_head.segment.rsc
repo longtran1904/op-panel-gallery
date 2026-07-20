@@ -1,0 +1,5 @@
+1:"$Sreact.fragment"
+2:I[31786,["/_next/static/chunks/3nc-028i_uhad.js","/_next/static/chunks/0f2iw2yh-3iq1.js"],"ViewportBoundary"]
+3:I[31786,["/_next/static/chunks/3nc-028i_uhad.js","/_next/static/chunks/0f2iw2yh-3iq1.js"],"MetadataBoundary"]
+4:"$Sreact.suspense"
+0:{"rsc":["$","$1","h",{"children":[null,["$","$L2",null,{"children":[["$","meta","0",{"charSet":"utf-8"}],["$","meta","1",{"name":"viewport","content":"width=device-width, initial-scale=1"}]]}],["$","div",null,{"hidden":true,"children":["$","$L3",null,{"children":["$","$4",null,{"name":"Next.Metadata","children":[["$","title","0",{"children":"Karasuno Final Jump | Manga Panel Gallery"}],["$","meta","1",{"name":"description","content":"Haikyu!!, Haikyu!! / Haruichi Furudate / Chapter 292 / Nationals / 2018 / Portrait. The panel turns athletic timing into bright vertical lift, letting bodies and white space share the same rush upward."}]]}]}]}],["$","meta",null,{"name":"next-size-adjust","content":""}]]}],"isPartial":false,"staleTime":300,"varyParams":null,"buildId":"wt4a6GFSUfgW2zaSnpXz5"}

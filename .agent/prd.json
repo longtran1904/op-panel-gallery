@@ -1,6 +1,25 @@
 {
   "project": "Manga Panel Gallery",
   "currentMilestone": "Six-panel vertical slice",
+  "agentRunDiagnostics": [
+    {
+      "date": "2026-07-20",
+      "sourceRuns": [
+        ".agent/runs/20260719T200624Z-001.final.md",
+        ".agent/runs/20260719T200624Z-001.log",
+        ".agent/runs/20260719T201109Z-002.final.md",
+        ".agent/runs/20260719T201109Z-002.log"
+      ],
+      "unsuccessfulOutcome": "MG-003 was left pending because the previous agent could not complete required live viewport validation. `./scripts/verify.sh` passed, but `next dev`/`next start` could not bind localhost inside the sandbox (`listen EPERM`), Playwright browser install was blocked by restricted network (`ENOTFOUND cdn.playwright.dev`), and system Chrome headless produced no usable DOM or screenshot output in that sandbox.",
+      "rerunDiagnosis": "Rerunning with the local Next server and Chrome allowed outside the sandbox resolved the environment blocker: `./scripts/verify.sh` passed and live measurements at 320px, 768px, and 1440px showed no horizontal overflow. The rerun also exposed a real MG-003 quality issue: `.imageFrame` is a `figure`, and default browser figure margins remain active on mobile, shrinking each 320px viewport image frame to about 208px with 40px side margins. That makes metadata feel too competitive with the artwork and weakens the artwork-dominance acceptance criterion.",
+      "resolutionBeforeNextTask": [
+        "Do not advance to MG-004 until MG-003 is completed.",
+        "Repair MG-003 by resetting the gallery figure margins, for example set `.imageFrame { margin: 0; width: 100%; }` in `src/components/gallery/panel-gallery.module.css` while preserving natural image ratios and the existing editorial rhythm.",
+        "Validate MG-003 with `./scripts/verify.sh`, then run live browser checks against a local Next server at 320px, 768px, and 1440px. If sandboxed server or browser commands fail with `listen EPERM`, `kill EPERM`, or browser-launch failures, rerun those validation commands outside the sandbox rather than incrementing task attempts for an environment-only failure.",
+        "Only mark MG-003 complete after the repaired mobile gallery keeps artwork visually dominant, has no horizontal overflow at the required widths, and the visual-rubric score is at least 9/12."
+      ]
+    }
+  ],
   "tasks": [
     {
       "id": "MG-001",
@@ -49,7 +68,7 @@
       "id": "MG-003",
       "title": "Build the editorial gallery composition",
       "status": "pending",
-      "attempts": 1,
+      "attempts": 3,
       "description": "Render the six panels as a responsive editorial exhibition.",
       "acceptanceCriteria": [
         "Panels are rendered from the canonical data source",
@@ -72,7 +91,7 @@
       "id": "MG-004",
       "title": "Implement the panel detail experience",
       "status": "pending",
-      "attempts": 0,
+      "attempts": 1,
       "description": "Create an accessible detail experience with URL-backed selection.",
       "acceptanceCriteria": [
         "A panel can be opened and closed using the keyboard",

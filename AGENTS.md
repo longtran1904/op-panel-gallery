@@ -52,7 +52,7 @@ commands pass.
 
 ## Required validation (Only required when agent is in task execution mode)
 
-Don't applyy validation steps when the prompt involves improving agent loop, agent architecture
+Don't apply validation steps when the prompt involves improving agent loop, agent architecture
 Before reporting a task complete:
 
 1. Run `./scripts/verify.sh`.

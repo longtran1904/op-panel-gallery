@@ -30,4 +30,3 @@ When blocked:
 - Increment the task's attempts count.
 - Record the exact blocker and command output in progress.md.
 - Propose the smallest next corrective action.
-- Stop after three unsuccessful repair attempts.

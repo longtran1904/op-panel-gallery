@@ -22,7 +22,9 @@ pnpm dev
 ```
 
 Open `http://localhost:3000` to view the exhibition homepage and editorial
-panel gallery.
+panel gallery. Gallery panel links open the focused detail view in place, and
+direct panel pages are available at paths such as
+`http://localhost:3000/panels/straw-hat-at-dawn`.
 
 To run on a different port, use Next directly:
 
@@ -39,6 +41,16 @@ Run the full project verification script:
 ```
 
 This runs linting, TypeScript checking, and a production build.
+
+For visual iterations, also run the app locally and inspect the gallery at
+320px, 768px, and 1440px:
+
+```bash
+pnpm dev
+```
+
+Use `http://localhost:3000` for the viewport checks. Confirm there is no
+horizontal overflow at 320px before marking a visual task complete.
 
 ## Agent Loop
 
@@ -81,3 +93,6 @@ Start the built app:
 ```bash
 pnpm start
 ```
+
+For production-style local validation, run `pnpm build` first, then start the
+built app with `pnpm start` and open `http://localhost:3000`.
